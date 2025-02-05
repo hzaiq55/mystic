@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, touch-action=manipulation">
+    <title>Recordflip Admin Panel</title>
+    
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="css/adminstyles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    
+</head>
+<body>
+    <script>
+        // Authentication check
+        if (!sessionStorage.getItem('adminAuthenticated')) {
+            window.location.href = 'login.html';
+        }
+    </script>
+    <nav class="navbar">
+        <div class="logo">Recordflip Admin</div>
+        <div class="nav-right">
+            <a href="#" class="nav-link" onclick="showSitePreview(event)">Preview</a>
+            <div class="user-menu">
+                <button class="user-btn" onclick="toggleUserMenu()">
+                    <i class="fas fa-user"></i>
+                </button>
+                <div class="user-dropdown" id="userDropdown">
+                    <div class="user-info">
+                        <span id="currentUsername"></span>
+                    </div>
+                    <button onclick="showUserManagement()">Manage Users</button>
+                    <button onclick="logout()" class="logout-dropdown-btn">Logout</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Move notification banner outside dashboard but after navbar -->
+    <div id="notification-banner" class="notification-banner">
+        <span id="notification-message"></span>
+        <button class="close-banner" onclick="closeBanner()">&times;</button>
+    </div>
+
+    <div class="dashboard">
+        <div class="sidebar">
+            <ul>
+                <li class="sidebar-item active" onclick="showSection('artists')">
+                    <i class="fas fa-microphone"></i>
+                    <span class="sidebar-text">Manage Artists</span>
+                </li>
+                <li class="sidebar-item" onclick="showSection('releases')">
+                    <i class="fas fa-compact-disc"></i>
+                    <span class="sidebar-text">Manage Releases</span>
+                </li>
+                <li class="sidebar-item" onclick="showSection('careers')">
+                    <i class="fas fa-briefcase"></i>
+                    <span class="sidebar-text">Manage Careers</span>
+                </li>
+                <li class="sidebar-item" onclick="showSection('applications')">
+                    <i class="fas fa-file-alt"></i>
+                    <span class="sidebar-text">View Applications</span>
+                </li>
+                <li class="sidebar-item" onclick="showSection('messages')">
+                    <i class="fas fa-envelope"></i>
+                    <span class="sidebar-text">View Messages</span>
+                </li>
+                <li class="sidebar-item" id="userManagementLink" onclick="showSection('userManagement')">
+                    <i class="fas fa-users"></i>
+                    <span class="sidebar-text">User Management</span>
+                </li>
+            </ul>
+        </div>
+        <div class="content">
+            <div class="site-preview-container" id="sitePreview">
+                <iframe src="" class="site-preview-iframe" id="sitePreviewFrame"></iframe>
+            </div>
+
+            <!-- //manage artits/ -->
+            <div id="artists" class="admin-section" style="display:block;">
+                <h2>Manage Artists</h2>
+                <form class="admin-form" onsubmit="addArtist(event)">
+                    <div class="form-group">
+                        <input type="text" name="name" placeholder="Artist Name" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" name="genre" placeholder="Genre" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" name="image" placeholder="Image URL" required>
+                    </div>
+                    <div class="form-group">
+                        <textarea name="details" placeholder="Artist Details" required></textarea>
+                    </div>
+                    <button type="submit">Add Artist</button>
+                </form>
+                <div id="admin-artists-list"></div>
+            </div>
+
+            <!-- //manage release/ -->
+            <div id="releases" class="admin-section" style="display:none;">
+                <h2>Manage Releases</h2>
+                <form class="admin-form" onsubmit="addRelease(event)">
+                    <input type="text" name="name" placeholder="Release Name" required>
+                    <input type="text" name="genre" placeholder="Genre" required>
+                    <input type="url" name="link" placeholder="Release Link" required>
+                    <button type="submit">Add Release</button>
+                </form>
+                <div id="admin-releases-list"></div>
+            </div>
+            <!-- //manage career/ --> 
+            <div id="careers" class="admin-section" style="display:none;">
+                <h2>Manage Careers</h2>
+                <form class="admin-form" onsubmit="addCareer(event)">
+                    <input type="text" name="title" placeholder="Career Title" required>
+                    <textarea name="description" placeholder="Career Description" required></textarea>
+                    <button type="submit">Add Career</button>
+                </form>
+                <div id="admin-careers-list"></div>
+            </div>
+            <!-- //manage application messages/ --> 
+            <div id="applications" class="admin-section" style="display:none;"><section id="view-applications">
+                <h2>View Applications</h2>
+                <div id="applications-container"></div>
+            </section></div>
+            <!-- //manage contact messages/ -->
+            <div id="messages" class="admin-section" style="display:none;">
+                <section id="view-messages">
+                    <h2>View Messages</h2>
+                    <div id="messages-container"></div>
+                </section>
+            </div>
+            <!-- Update User Management Section -->
+            <div id="userManagement" class="admin-section" style="display:none;">
+                <h2>User Management</h2>
+                <form class="admin-form" onsubmit="addNewUser(event)">
+                    <input type="text" name="username" placeholder="Username" required>
+                    <input type="password" name="password" placeholder="Password" required>
+                    <select name="role" required>
+                        <option value="user">User</option>
+                        <option value="admin">Admin</option>
+                    </select>
+                    <button type="submit">Add User</button>
+                </form>
+
+                <h3>Change Your Password</h3>
+                <form class="admin-form" onsubmit="changePassword(event)">
+                    <input type="password" name="currentPassword" placeholder="Current Password" required>
+                    <input type="password" name="newPassword" placeholder="New Password" required>
+                    <input type="password" name="confirmPassword" placeholder="Confirm New Password" required>
+                    <button type="submit">Change Password</button>
+                </form>
+
+                <h3>Manage Users</h3>
+                <div id="users-list" class="users-list-container">
+                    <!-- Users will be rendered here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+<script>
+    function showSection(section) {
+        // Hide site preview if it's visible
+        const sitePreview = document.getElementById('sitePreview');
+        if (sitePreview.style.display === 'block') {
+            closeSitePreview();
+        }
+
+        // Hide all sections
+        const sections = document.querySelectorAll('.admin-section');
+        sections.forEach(sec => sec.style.display = 'none');
+
+        // Remove active class from all sidebar items
+        const sidebarItems = document.querySelectorAll('.sidebar-item');
+        sidebarItems.forEach(item => item.classList.remove('active'));
+
+        // Add active class to clicked sidebar item
+        const clickedItem = document.querySelector(`.sidebar-item[onclick="showSection('${section}')"]`);
+        if (clickedItem) {
+            clickedItem.classList.add('active');
+        }
+
+        // Show the selected section
+        document.getElementById(section).style.display = 'block';
+    }
+
+    async function handleArtistSubmit(event) {
+        event.preventDefault();
+        
+        try {
+            // Get existing artists
+            const existingArtists = await getData('artists') || [];
+            
+            // Create new artist
+            const newArtist = {
+                id: existingArtists.length + 1,
+                name: event.target.name.value,
+                genre: event.target.genre.value,
+                image: event.target.image.value,
+                details: event.target.details.value
+            };
+            
+            // Add to existing artists
+            existingArtists.push(newArtist);
+            
+            // Save updated artists
+            const response = await setData('artists', existingArtists);
+            console.log('Save response:', response);
+            
+            // Show success message
+            alert('Artist added successfully!');
+            event.target.reset();
+            
+        } catch (error) {
+            console.error('Error adding artist:', error);
+            alert('Error adding artist: ' + error.message);
+        }
+    }
+
+    function showSitePreview(event) {
+        event.preventDefault();
+        const container = document.getElementById('sitePreview');
+        const iframe = document.getElementById('sitePreviewFrame');
+        
+        // Toggle preview
+        if (container.style.display === 'block') {
+            closeSitePreview();
+        } else {
+            iframe.src = 'index.html';
+            container.style.display = 'block';
+            
+            // Hide all admin sections when showing preview
+            document.querySelectorAll('.admin-section').forEach(section => {
+                section.style.display = 'none';
+            });
+        }
+    }
+
+    function closeSitePreview() {
+        const container = document.getElementById('sitePreview');
+        const iframe = document.getElementById('sitePreviewFrame');
+        container.style.display = 'none';
+        iframe.src = '';
+    }
+
+    // Remove toggleDarkMode function and related event listeners
+</script>
+
+    <!-- Update the script tags order -->
+    <script src="js/admin.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', initializeAdminInterface);
+    </script>
+</body>
+</html>
+    <script>
+
+        document.addEventListener('DOMContentLoaded', initializeAdminInterface);
+    </script>
+</body>
+</html>

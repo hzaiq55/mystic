@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <!-- Add theme-color meta tags -->
+    <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
+    <title>Recordflip</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&family=Montserrat:wght@500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="logo"><span class="record">Record</span>
+            <span class="flip">Flip</span></div>
+        <div class="menu-toggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <ul class="nav-links">
+            <li><a href="#home"id="home-link">Home</a></li>
+            <li><a href="#artists">Artists</a></li>
+            <li><a href="#releases">Releases</a></li>
+            <li><a href="#finds">Finds</a></li>
+            <li><a href="#career">Career</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- In index.html -->
+    <section class="hero">
+        <video 
+            autoplay 
+            muted 
+            loop 
+            playsinline 
+            disablePictureInPicture 
+            controlsList="nodownload noplaybackrate" 
+            class="hero-video"
+            preload="auto"
+        >
+            <source src="video.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <div class="hero-overlay"></div> <!-- Dark overlay -->
+        <div class="hero-content">
+            
+            <img src="logos/logowhite.png" height="60" width="150"alt="Logo" class="hero-logo">
+            <p class="hero-subtitle">A record label for the modern era</p>
+            <br>
+            <a href="#releases" class="hero-button black-button">Explore</a>
+        </div>
+    </section>
+    <br>
+    <!-- Artists Section -->
+    <section id="artists" class="section">
+        <h2>Our Artists</h2>
+        <br>
+        <div class="artists-grid" id="artists-container"></div>
+    </section>
+
+    <!-- Releases Section -->
+    <section id="releases" class="section">
+        <h2>Latest Releases</h2>
+        <br>
+        <div class="releases-grid" id="releases-container"></div>
+    </section>
+    <!-- Recorfflip finds section -->
+    <section id="finds" class="section">
+        <h2>Recordflip Finds </h2>
+        <br>
+        <h3>Showcase Your Talent. Get Discovered. Join the Movement.</h3>
+<br>
+        <div class="about-content">
+<p2>RecordFlip Finds is your gateway to getting discovered and joining RecordFlip Records. By joining our Discord community, you connect with like-minded artists, producers, and creatives who share your passion for music. Showcase your talent, share your work, receive feedback, and collaborate with others to grow. Stand out, and you could get the chance to be selected for RecordFlip Records, gaining access to exclusive opportunities, industry exposure, and professional support</p2>
+<br>
+<br>
+<button type="submit" class="send-message-button" onclick="window.location.href='https:/discord.com/invite/7AFgBGTfxx';"> Join Recordflip Finds</button>
+        </div>
+    </section>
+
+    <!-- Career Section -->
+    <section id="career" class="section">
+        <h2>Career Opportunities</h2>
+        <br>
+        <div class="career-grid" id="career-container"></div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="section">
+        <h2>About </h2>
+        <br>
+        <div class="about-content">
+            <p>Recordflip is a cutting-edge record label dedicated to discovering and nurturing exceptional musical talent. Founded with a vision to revolutionize the music industry, we combine traditional values with modern innovation.
+            </p>
+            <p>We’re more than just a record label—we’re a movement dedicated to empowering artists, producers, and creatives to reach their full potential. Our mission is to provide the tools, resources, and industry expertise needed to amplify your sound and expand your reach.</p>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section">
+        <h2>Contact Us</h2>
+        <br>
+        <div class="contact-form">
+            <form id="contact-form" onsubmit="handleContactSubmit(event)">
+                <input type="text" name="name" placeholder="Your Name" required>
+                <input type="email" name="email" placeholder="Your Email" required>
+                <textarea name="message" placeholder="Your Message" required></textarea>
+                <button type="submit" class="send-message-button">Send Message</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Single Modal Structure -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <div id="modal-content"></div>
+        </div>
+    </div>
+
+    <script src="js/main.js"></script>
+    <script src="js/admin.js"></script>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section about">
+                
+            </div>
+            <div class="footer-section links">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#artists">Artists</a></li>
+                    <li><a href="#releases">Releases</a></li>
+                    <li><a href="#career">Career</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-section follow-us">
+                <h4>Follow Us</h4>
+                <div class="social-icons">
+                    <a href="https://www.instagram.com/recordflipp/" target="_blank"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.youtube.com/@recordflipstudios" target="_blank"><i class="fab fa-youtube"></i></a>
+                    <a href="https://www.facebook.com" target="_blank"><i class="fab fa-facebook"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Recordflip. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
