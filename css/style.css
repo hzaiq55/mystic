@@ -1,0 +1,1000 @@
+html {
+    scroll-behavior: smooth; /* Enable smooth scrolling */
+}
+
+
+
+:root {
+    --primary-color: #ffffff;
+    --secondary-color: #000000;
+    --accent-color: #333333;
+    --transition: all 0.3s ease;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    background-color: #ffffff; /* Light background */
+    color: #000000; /* Dark text */
+}
+body.dark-mode {
+    background-color: #121212; /* Dark background */
+    color: #fffbfb; /* Light text */
+}
+
+
+
+
+
+
+/* Navigation */
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.8);
+    padding: 1rem 2rem;
+    backdrop-filter: blur(20px);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 1000;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    border-bottom-left-radius: 7px; /* Rounded bottom left corner */
+    border-bottom-right-radius: 7px; 
+    
+}
+body.dark-mode .navbar {
+    
+    background: rgba(0, 0, 0, 0.8); /* Dark transparent background */
+}
+
+.nav-links.active {
+    opacity: 1; /* Fully visible */
+    transform: translateY(0); /* Move to original position */
+    visibility: visible; /* Make visible */
+    display: block;
+}
+
+/* Menu Items */
+.nav-links li {
+    list-style: none; /* Remove bullet points */
+    margin: 10px 0; /* Space between items */
+    transition: transform 0.3s; /* Smooth transition */
+}
+
+.nav-links li:hover {
+    transform: scale(1.05); /* Slightly enlarge on hover */
+}
+
+/* Menu Links */
+.nav-links li a {
+    text-decoration: none; /* Remove underline */
+    color: #000; /* Text color */
+    padding: 10px 15px; /* Padding for links */
+    border-radius: 5px; /* Rounded corners */
+    transition: background-color 0.3s; /* Smooth transition */
+}
+
+.nav-links li a:hover {
+    background-color: rgba(0, 0, 0, 0.1); /* Light hover effect */
+}
+
+.logo {
+    
+    font-weight: bold;
+    color: var(--secondary-color);
+    display: inline-block;
+    font-size: 2rem;
+}
+
+.nav-links {
+    display: block;
+    list-style: none;
+    position: relative;
+}
+
+.nav-links li {
+    display: inline-block;
+    margin: 0 15px; /* Space between links */
+    position: relative;
+}
+
+.nav-links li a {
+    color: var(--secondary-color);
+    text-decoration: none;
+    padding: 5px 0; /* Space for the hover effect */
+    transition: color 0.3s; /* Smooth color transition */
+}
+
+.nav-links li a:hover {
+    color: var(--accent-color); /* Change color on hover */
+}
+
+.nav-links li::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: -5px; /* Position below the text */
+    width: 0;
+    height: 2px; /* Thickness of the line */
+    background: var(--accent-color); /* Color of the line */
+    transition: width 0.3s ease, left 0.3s ease; /* Smooth transition */
+}
+
+.nav-links li:hover::after {
+    width: 100%; /* Expand the line on hover */
+    left: 0; /* Align to the left */
+}
+
+.nav-links li a.clicked {
+    transform: scale(0.95); /* Slightly shrink on click */
+    transition: transform 0.1s; /* Quick transition */
+}
+
+.menu-toggle {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+   
+}
+
+.menu-toggle span {
+    width: 25px;
+    height: 3px;
+    background: var(--secondary-color);
+    margin: 2px;
+    transition: var(--transition);
+}
+
+/* Hero Section */
+.hero {
+    position: relative;
+    height: 100vh; /* Full height */
+    overflow: hidden; 
+}
+
+
+.hero-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Cover the entire hero section */
+    z-index: 1; /* Behind the content */
+}
+.hero-image {
+    transition: transform 0.3s ease; /* Smooth transition for the zoom effect */
+}
+
+.hero-image:hover {
+    transform: scale(1.1); /* Scale the image to 110% when hovered */
+}
+
+
+.hero-content {
+    position: relative;
+    z-index: 2; /* Above the video */
+    color: #ffffff; /* Text color */
+    text-align: center; /* Center text */
+    display: flex; /* Use flexbox for centering */
+    flex-direction: column; /* Stack elements vertically */
+    justify-content: center; /* Center vertically */
+    align-items: center; /* Center horizontally */
+    height: 100%;
+}
+
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); /* Semi-transparent black */
+    z-index: 1; /* Place it above the video but below the content */
+}
+
+
+
+.hero-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--secondary-color);
+    animation: backgroundAnimation 20s infinite;
+}
+
+@keyframes backgroundAnimation {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
+.hero h1 {
+    font-size: 3.5rem;
+    margin-bottom: 2rem;
+}
+
+#latest-releases-btn {
+    padding: 1rem 2rem;
+    font-size: 1.2rem;
+    background: var(--primary-color);
+    color: var(--secondary-color);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+#latest-releases-btn:hover {
+    background: var(--accent-color);
+    color: var(--primary-color);
+    padding: 2rem; /* Add padding */
+    margin: 1rem 0; /* Space between sections */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow *und */
+    font-family: 'Roboto', sans-serif; 
+}
+
+/* Section Styles */
+.section {
+    
+    padding: 5rem 2rem; /* Keep your original padding */
+    scroll-margin-top: 100px; 
+}
+
+.section h2 {
+    text-align: center;
+    font-family: 'Montserrat', sans-serif; 
+    font-size: 2rem; 
+    margin-top: 0;
+    
+    
+}
+
+/* Grid Layouts */
+.artists-grid,
+.releases-grid,
+.career-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    padding: 1rem;
+}
+/* Enable horizontal scrolling on mobile devices */
+@media (max-width: 768px) {
+    .artists-grid,
+    .releases-grid,
+    .career-grid {
+        display: flex; /* Use flexbox for horizontal scrolling */
+        overflow-x: auto; /* Enable horizontal scrolling */
+        padding: 10px; /* Optional padding */
+    }
+
+    .artists-grid .card,
+    .releases-grid .card,
+    .career-grid .card {
+        flex: 0 0 auto; /* Prevent cards from shrinking */
+        margin-right: 10px; /* Space between cards */
+    }
+}
+.artists-grid::-webkit-scrollbar,
+.releases-grid::-webkit-scrollbar,
+.career-grid::-webkit-scrollbar {
+    display: none; /* Hide the scrollbar */
+}
+
+/* Hide scrollbar for Internet Explorer and Edge */
+.artists-grid,
+.releases-grid,
+.career-grid {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+}
+
+/* Cards */
+.card {
+     /* Adjust the value as needed for spacing */
+    background: var(--primary-color);
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    transition: var(--transition);
+    text-align: center;
+    padding: 16px;
+    margin: 16px; 
+    flex: 1;
+    transition: transform 0.3s; 
+}
+@media (max-width: 768px) {
+    .card {
+        margin: 8px; /* Reduce margin on mobile */
+        padding: 12px; /* Reduce padding on mobile */
+    }
+}
+.card-container {
+    display: flex; /* Use flexbox for layout */
+    flex-wrap: wrap; /* Allow cards to wrap onto the next line */
+    justify-content: space-between; /* Space out cards */
+}
+@media (max-width: 480px) {
+    .card {
+        flex: 0 0 100%; /* Full width on small screens */
+        margin: 4px; /* Further reduce margin */
+    }
+}
+
+
+.card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+}
+
+.card img {
+    width: 100px; /* Set a fixed width */
+    height: 100px; /* Set a fixed height */
+    border-radius: 50%; /* Makes the image round */
+    object-fit: cover;
+    margin-top: 20px;
+    align-items: center; /* Ensures the image covers the area */
+}  
+
+.card-content {
+    padding: 1.5rem;
+}
+
+
+@media (max-width: 480px) {
+    .card-content {
+        padding: 8px; /* Further reduce padding on mobile phones */
+    }
+
+    .card-content h2 {
+        font-size: 1.2rem; /* Smaller for mobile phones */
+    }
+    
+    .card-content p {
+        font-size: 0.8rem; /* Even smaller for mobile phones */
+    }
+}
+
+
+.career-grid .card:hover {
+    transform: translateY(-5px);
+}
+
+.career-grid .card img {
+    width: 100%;
+    height: 200px; /* Set a fixed height */
+    object-fit: cover; /* Ensure the image covers the area */
+}
+
+.career-grid .card-content {
+    padding: 1rem;
+}
+
+.career-grid .card-content h3 {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+    font-family: sans-serif;
+    font-weight: lighter;
+}
+
+.career-grid .card-content p {
+    color: #666;
+}
+
+/* Contact Form */
+.contact-form {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.contact-form form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    text-align: center;
+}
+
+.contact-form input,
+.contact-form textarea {
+    padding: 0.8rem;
+    border: 1px solid var(--accent-color);
+    border-radius: 5px;
+}
+
+.contact-form button {
+    padding: 1rem;
+    background: var(--secondary-color);
+    color: var(--primary-color);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.contact-form button:hover {
+    background: var(--accent-color);
+}
+
+/* Modal */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 1001;
+    backdrop-filter: blur(10px);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease;
+}
+
+.modal.show {
+    opacity: 1;
+    visibility: visible;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background: var(--primary-color);
+    padding: 2rem;
+    border-radius: 10px;
+    width: 100%;
+    height: 90%;
+    color: black;
+    position: relative;
+    text-align: center;
+    transform: translateY(100%);
+    transition: transform 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
+}
+
+.modal.show .modal-content {
+    transform: translateY(0);
+}
+
+body.dark-mode .modal-content {
+    
+    color:rgb(255, 255, 255);
+    background-color: #1e1e1e;
+    text-align: center;
+    
+}
+
+
+
+.close-modal {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    font-size: 2.5rem;
+    cursor: pointer;
+}
+
+
+/* Animations */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.fade-in {
+    animation: fadeIn 0.5s ease-in;
+}
+.career-grid .card {
+    background: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s;
+    overflow: hidden;
+}
+
+.career-grid .card:hover {
+    transform: translateY(-5px);
+}
+
+
+
+.career-grid .card-content {
+    padding: 1rem;
+}
+
+
+.career-grid .card-content p {
+    color: #666;
+}
+
+.footer {
+    background-color: #f1f1f1; /* Light background */
+    padding: 2rem 1rem; /* Padding for the footer */
+    text-align: center; /* Center text */
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between; /* Space between sections */
+    flex-wrap: wrap; /* Wrap on smaller screens */
+}
+
+.footer-section {
+    flex: 1; /* Equal width for all sections */
+    margin: 1rem; /* Margin around sections */
+}
+
+.footer-section h4 {
+    margin-bottom: 1rem; /* Space below headings */
+    font-size: 1.2rem; /* Font size for headings */
+}
+
+.footer-section p,
+.footer-section ul {
+    font-size: 0.9rem; /* Font size for text */
+}
+
+.footer-section ul {
+    list-style-type: none; /* Remove bullet points */
+    padding: 0; /* Remove padding */
+}
+
+.footer-section ul li {
+    margin: 0.5rem 0; /* Space between links */
+}
+
+.footer-section a {
+    text-decoration: none; /* Remove underline */
+    color: #000; /* Dark text color */
+}
+
+.footer-section a:hover {
+    text-decoration: underline; /* Underline on hover */
+}
+
+.social-icons {
+    display: flex; /* Flexbox for icons */
+    gap: 1rem; /* Space between icons */
+    justify-content: center; /* Ctween icons */
+}
+
+.social-icons a {
+    color: #000; /* Icon color */
+    font-size: 1.5rem; /* Icon size */
+    transition: transform 0.3s ease; /* Smooth transition for zoom */
+    display: inline-block; /* Needed for transform to work */
+}
+
+.social-icons a:hover {
+    transform: scale(1.3); /* Zoom effect on hover */
+}
+
+/* Ensure dark mode icons also have the effect */
+body.dark-mode .social-icons a:hover {
+    transform: scale(1.3);
+    color: #fff; /* Keep the color consistent in dark mode */
+}
+
+/* Footer Bottom */
+.footer-bottom {
+    margin-top: 1rem; /* Space above bottom text */
+    font-size: 0.8rem; /* Smaller font for copyright */
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .footer-content {
+        flex-direction: column; /* Stack sections vertically */
+        align-items: center; /* Center align */
+    }
+
+    .footer-section {
+        margin: 1rem 0; /* Margin for stacked sections */
+    }
+}
+
+
+/* hero button */
+
+.black-button {
+    background-color: rgba(0, 0, 0, 0.5); /* Dark transparent background */
+    color: #ffffff; /* White text */
+    padding: 10px 20px; /* Padding for the button */
+    border: 1px solid white; /* White border */
+    border-radius:50px; /* Rounded corners */
+    text-decoration: none; /* Remove underline */
+    font-size: 10px; /* Font size */
+    transition: background-color 0.3s, transform 0.3s; /* Smooth transition */
+    backdrop-filter: blur(5px); /* Apply blur effect */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+    font-family: sans-serif;
+    font-weight: lighter;
+}
+
+.black-button:hover {
+    background-color: rgba(0, 0, 0, 0.7); /* Slightly more opaque on hover */
+    transform: scale(1.05); /* Slightly enlarge on hover */
+}
+
+
+.hero-content h1 {
+    font-family: 'Roboto', sans-serif; /* Ensure you have the font imported */
+    font-weight: 300; /* Light weight */
+    font-style: italic; /* Italic style */
+    font-size: 36px; /* Adjust size as needed */
+    text-align: center; /* Center text */
+    margin: 0; /* Remove default margin */
+}
+
+.hero-content .hero-subtitle {
+    font-family: 'Roboto', sans-serif; /* Ensure you have the font imported */
+    font-weight: 200; /* Thinner than the heading */
+    font-size: 10px; /* Smaller size */
+    text-align: center; /* Center text */
+    margin: 10px 0; /* Add some margin for spacing */
+    color: #ffffff; /* White text color */
+    transition: transform 0.3s ease;
+}
+.hero-subtitle:hover {
+    transform: scale(1.1); /* Scale the subtitle to 110% when hovered */
+}
+
+/*dark mode*/
+
+
+body.dark-mode .navbar {
+    background: rgba(0, 0, 0, 0.8); /* Dark transparent background */
+}
+
+body.dark-mode .navbar a {
+    color: #ffffff; /* Light text for links */
+}
+
+body.dark-mode .button {
+    background-color: rgba(0, 0, 0, 0.5); /* Dark button */
+    color: #ffffff; /* Light text */
+}
+body.dark-mode .button:hover {
+    background-color: rgba(255, 255, 255, 0.2); /* Light hover effect for dark mode */
+}
+body.dark-mode a {
+    color: #ffffff; /* Light text for links */
+}
+body.dark-mode .menu-toggle span {
+    background-color: #ffffff; /* Change icon color to white in dark mode */
+}
+body.dark-mode .logo {
+    color: #ffffff; /* Light text for the logo in dark mode */
+}
+
+
+body.dark-mode .send-message-button {
+    background-color: #1e1e1e; /* Dark background for the button in dark mode */
+    color: #ffffff; /* Light text color */
+    border: 1px solid #333; /* Optional border for contrast */
+}
+
+body.dark-mode .send-message-button:hover {
+    background-color: rgba(255, 255, 255, 0.2); /* Light hover effect for dark mode */
+}
+body.dark-mode .card {
+    background-color: #1e1e1e; /* Dark background for artist cards */
+    color: #ffffff; /* Light text color */
+    border: 1px solid #333; /* Optional border for contrast */
+}
+body.dark-mode .navbar a  {
+    
+    color: #ccc5c5; /* Light text color */
+}
+
+body.dark-mode .footer {
+    background-color: #1e1e1e; /* Dark background for footer */
+    color: #ffffff; /* Light text color */
+}
+
+body.dark-mode .footer a {
+    color: #ffffff; /* Light text color for links */
+}
+
+body.dark-mode .footer a:hover {
+    text-decoration: underline; /* Underline on hover */
+}
+
+body.dark-mode .footer-section h4 {
+    color: #ffffff; /* Light color for section headings */
+}
+
+body.dark-mode .social-icons a {
+    color: #ffffff; /* Light color for social media icons */
+}
+
+body.dark-mode .footer-bottom {
+    color: #ffffff; /* Light color for copyright text */
+}
+@media (max-width: 768px) {
+    body.dark-mode .nav-links {
+        background: rgba(0, 0, 0, 0.9); /* Dark background for the opened mobile menu */
+        color: #ffffff; /* Light text color for links */
+    }
+}
+
+#about .about-content p {
+
+    font-style: italic; /* Italicize the text */
+    font-size: 1rem; /* Example font size */
+    line-height: 1.5; /* Example line height for readability */
+    text-align: justify;
+}
+
+
+ #modal input, .dialog input,
+.popup textarea, #modal textarea, .dialog textarea {
+    padding: 10px; /* Padding inside input fields */
+    margin: 10px 0; /* Margin between fields */
+    border: 1px solid #ccc; /* Border for input fields */
+    border-radius: 20px; /* Rounded corners */
+    font-size: 1rem; /* Font size */
+    width: 100%; /* Full width */
+    box-sizing: border-box;
+    
+}
+/* Media query for desktop or higher screens */
+@media (min-width: 1024px) {
+    #modal input, .dialog input,
+    .popup textarea, #modal textarea, .dialog textarea {
+        max-width: 30%;
+    }
+}
+/* Media query for tablet or higher screens */
+@media (min-width: 700px) {
+    #modal input, .dialog input,
+    .popup textarea, #modal textarea, .dialog textarea {
+        max-width: 30%;
+    }
+}
+
+#finds{
+
+    text-align: center;
+}
+
+ .about-content .send-message-button {
+    
+    background: var(--secondary-color);
+    color: var(--primary-color);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 50%; /* Full width */
+    max-width: 400px; /* Maximum width to prevent it from being too large */
+    padding: 10px 15px; /* Padding for the button */
+    cursor: pointer;
+    transition: var(--transition);
+    text-align: center;
+    height: 45px;
+    
+    
+}
+#finds .about-content  button:hover {
+    
+    background: var(--accent-color);
+}
+
+/*dark mode for discord button */
+body.dark-mode #finds .about-content .send-message-button {
+    background-color: #1e1e1e; /* Dark background for the button in dark mode */
+    color: #ffffff; /* Light text color */
+    border: 1px solid #333; /* Optional border for contrast */
+}
+
+/* Dark mode hover effect */
+body.dark-mode #finds .about-content .send-message-button:hover {
+    background-color: rgba(255, 255, 255, 0.2); 
+}
+
+/* popup stuff */
+/* Button styles for popup, modal, and dialog */
+
+#modal button,
+.dialog button {
+    background-color: black; /* Button background color */
+    color: #ffffff; /* Button text color */
+    padding: 1rem; /* Padding inside the button */
+    border: none; /* No border */
+    border-radius: 20px; /* Rounded corners */
+    cursor: pointer; /* Pointer cursor on hover */
+    font-size: 1rem; /* Font size */
+    transition: background-color 0.3s ease;
+    /* Smooth transition for background color */
+    max-width: 70%;
+}
+
+/* Media query for larger screens */
+@media (min-width: 768px) {
+    .dialog button {
+        padding: 1.5rem;
+        font-size: 1.25rem;
+        width: auto;
+    }
+}
+
+/* Media query for extra large screens */
+@media (min-width: 1200px) {
+    .dialog button {
+        padding: 2rem;
+        font-size: 1.5rem;
+        width: auto;
+    }
+}
+
+/* Hover effect for buttons */
+.popup button:hover,
+#modal button:hover,
+.dialog button:hover {
+    background-color: #363636; /* Darker background on hover */
+}
+
+/* Dark mode button styles */
+body.dark-mode .popup button,
+body.dark-mode #modal button,
+body.dark-mode .dialog button {
+    background-color: #444; /* Dark background for dark mode */
+    color: #ffffff; /* Light text color */
+}
+
+/* Dark mode hover effect */
+body.dark-mode .popup button:hover,
+body.dark-mode #modal button:hover,
+body.dark-mode .dialog button:hover {
+    background-color: #666; /* Darker shade on hover in dark mode */
+}
+.popup img,
+#modal img,
+.dialog img {
+    
+
+    width: 150px; /* Fixed width */
+    height: 150px; /* Fixed height to maintain square ratio */
+    border-radius: 50%; /* Make the image rounded */
+    object-fit: cover; /* Ensure the image covers the area without distortion */
+    border: 2px solid #252628;
+}
+#home, #artists, #finds, #releases, #career, #about, #contact {
+    padding-top: 60px; /* Adjust this value as needed */
+    margin-top: -60px; /* This offsets the padding to maintain layout */
+}
+
+.record {
+    font-weight: bold; /* Make "Record" bold */
+    color: #000; /* Color for "Record" */
+}
+
+.flip {
+    font-weight: lighter; /* Make "Flip" lighter */
+    color: #888; /* Lighter color for "Flip" */
+    display: inline-block;  /* Animation properties */
+    transition: transform 0.6s ease;
+}
+.flipping {
+    animation: flipAnimation 0.5s forwards; /* Animation properties */
+    transform: rotateY(180deg);
+}
+
+
+@keyframes flipAnimation {
+    0% {
+        transform: rotateX(0deg); /* Initial state */
+    }
+    50% {
+        transform: rotateX(180deg); /* Flipped state */
+        color: #000; /* Change color to match "Record" while flipped */
+    }
+    100% {
+        transform: rotateX(0deg); /* Return to original state */
+    }
+}
+
+body.dark-mode .navbar .record {
+    color: white; /* Dark color for the text in dark mode */
+}
+
+.hero-logo {
+    transition: transform 0.3s ease; /* Smooth transition for the zoom effect */
+}
+.hero-logo:hover {
+    transform: scale(1.1); /* Scale the image to 110% when hovered */
+}
+
+section h1, 
+section h2 {
+    transition: transform 0.3s ease; /* Smooth transition for the zoom effect */
+}
+
+section h1:hover,
+section h2:hover
+{
+    transform: scale(1.1); /* Scale the heading to 110% when hovered */
+}
+
+/* ...existing code... */
+
+@media (max-width: 768px) {
+    .nav-links {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 90%;
+        margin: 15px auto;
+        right: 0;
+        background: rgba(255, 255, 255, 0.95);
+        padding: 20px;
+        border-radius: 20px;
+        transform: translateY(-150%); /* Start further up for smoother animation */
+        transition: all 0.4s cubic-bezier(0.4, 0.0, 0.2, 1); /* Smooth easing */
+        opacity: 0;
+        visibility: hidden;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        z-index: 999;
+    }
+
+    .nav-links.active {
+        transform: translateY(0);
+        opacity: 1;
+        visibility: visible;
+    }
+
+    .nav-links li {
+        opacity: 0;
+        transform: translateY(-20px);
+        transition: all 0.3s ease-out;
+    }
+
+    .nav-links.active li {
+        opacity: 1;
+        transform: translateY(0);
+        transition-delay: 0.2s; /* Slight delay for items to follow menu */
+    }
+
+    body.dark-mode .nav-links {
+        background: rgba(30, 30, 30, 0.95);
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    }
+}
+
+/* Add these new styles for heading animations */
+.heading-animation {
+    opacity: 0;
+    transform: scale(0.95);
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.heading-zoom {
+    opacity: 1;
+    transform: scale(1);
+}
+
+@media (max-width: 768px) {
+    .heading-animation {
+        transform: scale(0.9);
+    }
+    
+    .heading-zoom {
+        transform: scale(1.02);
+    }
+}
+
+/* ...existing code... */
+
+
+

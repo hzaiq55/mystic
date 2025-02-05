@@ -1,0 +1,1 @@
+[{"id":1,"name":"dfgfg","genre":"fdgf","image":"https:\/\/asl.xom","details":"fdgfg"},{"id":2,"name":"andamanda","genre":"ruku","image":"https:\/\/ask.comd","details":"dsfdsf"}]
